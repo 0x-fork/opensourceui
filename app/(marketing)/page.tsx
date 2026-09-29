@@ -29,6 +29,7 @@ import { HomeTestimonials } from "./_components/home-testimonials";
 import { ShowcaseScrollRestoration } from "@/app/_shared/scroll/showcase-scroll-restoration";
 import { createPageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
+import { Vercel } from "@/icons/brands/vercel";
 import { MarketingSiteNav } from "./_components/marketing-site-nav";
 import { PhoneCustomizeDemo } from "./_components/phone-customize-demo";
 import { HomeSeoFaq } from "./_components/home-seo-faq";
@@ -72,6 +73,17 @@ export default function Home() {
             {`, for personal and commercial use.`}
           </Paragraph>
           <CtaButtons />
+          <a
+            href="https://vercel.com/open-source-program"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-1.5 text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+          >
+            <span>Sponsored by</span>
+            <Vercel size={11} className="text-neutral-900" />
+            <span className="font-medium text-neutral-800">Vercel</span>
+            <span>Open Source Program</span>
+          </a>
         </div>
 
         <div className="w-full max-w-7xl px-4 md:px-0">

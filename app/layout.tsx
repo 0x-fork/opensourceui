@@ -5,6 +5,7 @@ import "./globals.css";
 import { AnalyticsTracker } from "@/components/system/analytics";
 import { NavigationLoader } from "@/app/_shared/navigation/navigation-loader";
 import { PathMemoryTracker } from "@/app/_shared/navigation/path-memory-tracker";
+import { ScrollMemory } from "@/app/_shared/scroll/scroll-memory";
 import { ScrollToTopButton } from "@/app/_shared/scroll/scroll-to-top-button";
 import { JsonLd, getRootSiteJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -120,6 +121,7 @@ export default function RootLayout({
         <AnalyticsTracker />
         <Suspense fallback={null}>
           <PathMemoryTracker />
+          <ScrollMemory />
         </Suspense>
         <NavigationLoader />
         <ScrollToTopButton />

@@ -24,12 +24,6 @@ type ResourceItem = {
 
 const resources: ResourceItem[] = [
   {
-    name: "Vercel",
-    description: "For deploying",
-    href: "https://vercel.com",
-    Icon: Vercel,
-  },
-  {
     name: "Tailwind CSS",
     description: "For styling",
     href: "https://tailwindcss.com",
@@ -41,13 +35,6 @@ const resources: ResourceItem[] = [
     description: "For tracking",
     href: "https://posthog.com",
     imageSrc: "/posthog.png",
-  },
-  {
-    name: "Dither.it",
-    description: "For making images better",
-    href: "https://ditherit.com",
-    letter: "D",
-    color: "text-rose-400",
   },
   {
     name: "Cursor",
@@ -194,6 +181,14 @@ function ListRow({
 }
 
 const sponsors: ResourceItem[] = [
+  {
+    name: "Vercel",
+    description: "Open-source program — hosting",
+    shortDescription: "OSS hosting",
+    href: "https://vercel.com/open-source-program",
+    domain: "vercel.com",
+    Icon: Vercel,
+  },
   {
     name: "Sentry",
     description: "Open-source sponsor — error monitoring",

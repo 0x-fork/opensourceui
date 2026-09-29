@@ -1,13 +1,11 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { Clock, Eye, Users } from "lucide-react";
 
 import { cn } from "@/lib/cn";
-import { HOME_REVIEWS } from "@/lib/home/testimonials";
 import { siteConfig } from "@/lib/site";
 
-const VISITOR_AVATARS = HOME_REVIEWS.slice(0, 3);
+const VISITOR_INITIALS = ["N", "B", "S"] as const;
 
 const VISITOR_BARS = [
   { id: "w1", height: "h-8" },
@@ -66,21 +64,23 @@ function PageViewsCard() {
       label="Page views"
     >
       <svg
-        viewBox="0 0 160 52"
-        className="h-18 w-full text-neutral-700"
+        viewBox="0 0 320 120"
+        preserveAspectRatio="none"
+        className="h-32 w-full text-neutral-400"
         aria-hidden
       >
         <path
-          d="M0 44 L28 40 L56 33 L84 26 L112 18 L140 12 L160 8 V52 H0 Z"
+          d="M0 100 L70 72 L70 72 L150 72 L230 36 L320 18 V120 H0 Z"
           className="fill-neutral-100"
         />
         <polyline
-          points="0,44 28,40 56,33 84,26 112,18 140,12 160,8"
+          points="0,100 70,72 150,72 230,36 320,18"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     </StatCardShell>
@@ -97,21 +97,26 @@ function VisitorsCard() {
     >
       <div className="flex flex-col gap-5">
         <div className="flex items-center">
-          {VISITOR_AVATARS.map((review, index) => (
-            <div
-              key={review.name}
-              className="relative size-8 shrink-0 overflow-hidden rounded-full bg-neutral-200 ring-2 ring-white not-first:-ml-2"
-              style={{ zIndex: VISITOR_AVATARS.length - index }}
+          {VISITOR_INITIALS.map((initial, index) => (
+            <span
+              key={initial}
+              aria-hidden
+              className={cn(
+                "relative flex size-8 shrink-0 items-center justify-center rounded-full border border-neutral-200/80 bg-neutral-50 font-sans text-[11px] font-medium text-neutral-600 ring-2 ring-white",
+                index > 0 && "-ml-2.5",
+              )}
+              style={{ zIndex: index + 1 }}
             >
-              <Image
-                src={review.avatar}
-                alt=""
-                fill
-                sizes="32px"
-                className="object-cover"
-              />
-            </div>
+              {initial}
+            </span>
           ))}
+          <span
+            aria-hidden
+            className="relative -ml-2.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-neutral-200 font-sans text-xs font-medium text-neutral-600 ring-2 ring-white"
+            style={{ zIndex: VISITOR_INITIALS.length + 1 }}
+          >
+            +
+          </span>
         </div>
 
         <div className="flex h-18 items-end gap-1">

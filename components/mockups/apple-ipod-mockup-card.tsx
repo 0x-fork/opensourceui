@@ -3,6 +3,7 @@ import {
   type ComponentPropsWithoutRef,
   type ReactNode,
 } from "react";
+import { FastForward, Pause, Play, Rewind } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 
@@ -85,29 +86,34 @@ function ClickWheel({
       >
         Menu
       </span>
+      <Rewind
+        size={10}
+        fill="currentColor"
+        strokeWidth={0}
+        aria-hidden
+        className={cn(
+          "absolute top-1/2 left-1.5 -translate-y-1/2",
+          frame.label,
+        )}
+      />
+      <FastForward
+        size={10}
+        fill="currentColor"
+        strokeWidth={0}
+        aria-hidden
+        className={cn(
+          "absolute top-1/2 right-1.5 -translate-y-1/2",
+          frame.label,
+        )}
+      />
       <span
         className={cn(
-          "absolute top-1/2 left-2 -translate-y-1/2 text-[7px] font-bold",
+          "absolute bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-px",
           frame.label,
         )}
       >
-        {"\u25C0\u25C0"}
-      </span>
-      <span
-        className={cn(
-          "absolute top-1/2 right-2 -translate-y-1/2 text-[7px] font-bold",
-          frame.label,
-        )}
-      >
-        {"\u25B6\u25B6"}
-      </span>
-      <span
-        className={cn(
-          "absolute bottom-2 left-1/2 -translate-x-1/2 text-[7px] font-bold",
-          frame.label,
-        )}
-      >
-        {"\u25B6\u275A"}
+        <Play size={8} fill="currentColor" strokeWidth={0} aria-hidden />
+        <Pause size={8} fill="currentColor" strokeWidth={0} aria-hidden />
       </span>
 
       <div

@@ -8,6 +8,7 @@ export const siteConfig = {
   url: "https://opensourceui.in",
   ogImage: "/opensourceui-banner.png",
   launchedAt: "2026-07-09",
+  updatedAt: "2026-09-30",
   github: {
     url: "https://github.com/bidyut10/opensourceui",
     sponsorsUrl: "https://github.com/sponsors/bidyut10",

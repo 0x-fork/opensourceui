@@ -4,6 +4,11 @@ import Link from "next/link";
 import { forwardRef, type ComponentProps } from "react";
 
 import { trackComponentClick } from "@/lib/analytics/client";
+import {
+  flushCurrentScroll,
+  pauseScrollSaves,
+  scrollMemoryKey,
+} from "@/lib/navigation/scroll-memory";
 import { saveShowcaseScroll } from "@/lib/showcase/scroll-restoration";
 
 type SaveScrollLinkProps = ComponentProps<typeof Link>;
@@ -24,6 +29,12 @@ export const SaveScrollLink = forwardRef<
       ref={ref}
       href={href}
       onClick={(event) => {
+        const path =
+          typeof globalThis !== "undefined" ? globalThis.location.pathname : "";
+        const search =
+          typeof globalThis !== "undefined" ? globalThis.location.search : "";
+        flushCurrentScroll(scrollMemoryKey(path, search.replace(/^\?/, "")));
+        pauseScrollSaves();
         saveShowcaseScroll();
 
         const slug = slugFromHref(href);

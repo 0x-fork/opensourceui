@@ -53,6 +53,14 @@ function FooterLink({
 export function SiteFooter() {
   const year = new Date().getFullYear();
   const { author } = siteConfig;
+  const updatedLabel = new Date(
+    `${siteConfig.updatedAt}T12:00:00Z`,
+  ).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 
   return (
     <footer className="mt-36 w-full">
@@ -191,6 +199,10 @@ export function SiteFooter() {
                 <span className="font-mono tracking-[0.06em] text-neutral-400">
                   © {year}
                 </span>
+                <span className="mx-1.5 text-neutral-300" aria-hidden="true">
+                  ·
+                </span>
+                <span>Last updated {updatedLabel}</span>
               </p>
             </div>
           </div>

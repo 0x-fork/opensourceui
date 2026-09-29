@@ -13,6 +13,7 @@ import { SponsorPaymentSuccess } from "@/app/(marketing)/_components/sponsor-pay
 import { SponsorPlacementPreviews } from "@/app/(marketing)/_components/sponsor-placement-previews";
 import { SponsorTrafficChart } from "@/app/(marketing)/_components/sponsor-traffic-chart";
 import { Sentry } from "@/icons/brands/sentry";
+import { Vercel } from "@/icons/brands/vercel";
 import { cn } from "@/lib/cn";
 import { getPolarCheckoutUrl } from "@/lib/polar";
 import { createPageMetadata } from "@/lib/seo";
@@ -240,12 +241,40 @@ export default function SponsorPage() {
         <div className="mt-36 w-full max-w-xl px-4 md:px-0">
           <Heading>Open-source program sponsors</Heading>
           <Paragraph>
-            Separate from the paid tiers above — some companies support this
-            project with product credits through their OSS programs. They keep
-            the site running; they are not brand placements you buy here.
+            Product credits that keep the site running. These are not the paid
+            placements above.
           </Paragraph>
 
           <ul className="mt-8 divide-y divide-neutral-100 border-y border-neutral-100">
+            <li>
+              <a
+                href="https://vercel.com/open-source-program"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3 py-5 transition-colors"
+              >
+                <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50 text-neutral-900">
+                  <Vercel size={16} />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                    <span className="font-sans text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">
+                      Vercel
+                    </span>
+                    <span className="font-mono text-[10px] tracking-[0.12em] text-neutral-400 uppercase">
+                      OSS program
+                    </span>
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-neutral-500">
+                    Hosts opensourceui.in through the Vercel Open Source
+                    Program.
+                  </span>
+                  <span className="mt-2 inline-block font-mono text-xs text-neutral-400 underline decoration-neutral-200 underline-offset-2 group-hover:text-neutral-600 group-hover:decoration-neutral-400">
+                    vercel.com/open-source-program
+                  </span>
+                </span>
+              </a>
+            </li>
             <li>
               <a
                 href="https://sentry.io/for/open-source/"
@@ -266,9 +295,7 @@ export default function SponsorPage() {
                     </span>
                   </span>
                   <span className="mt-1 block text-sm leading-relaxed text-neutral-500">
-                    Selected Opensource UI for their open-source sponsorship —
-                    they provide error monitoring so we can catch and fix bugs
-                    in production.
+                    Error monitoring so production bugs get caught and fixed.
                   </span>
                   <span className="mt-2 inline-block font-mono text-xs text-neutral-400 underline decoration-neutral-200 underline-offset-2 group-hover:text-neutral-600 group-hover:decoration-neutral-400">
                     sentry.io/for/open-source

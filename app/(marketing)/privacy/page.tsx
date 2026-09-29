@@ -114,9 +114,9 @@ export default function PrivacyPage() {
                 Third-party hosting
               </h2>
               <p className="mt-2">
-                The site is hosted on Vercel and/or Cloudflare Pages. Those
-                providers process standard server logs (IP, user agent,
-                requested URLs) under their own privacy policies.
+                The site is hosted on Vercel through their open-source program.
+                Vercel processes standard server logs (IP, user agent, requested
+                URLs) under their own privacy policy.
               </p>
             </section>
 
