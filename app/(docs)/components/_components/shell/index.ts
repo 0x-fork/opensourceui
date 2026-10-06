@@ -8,4 +8,7 @@ export { DocsSidebarFooter } from "./docs-sidebar-footer";
 export { DocsToc } from "./docs-toc";
 export type { DocsTocItem } from "./docs-toc";
 export { DocsSponsorCard } from "./docs-sponsor-card";
+export { DocsMobileSponsor } from "./docs-mobile-sponsor";
 export { DocsSearch } from "./docs-search";
+export { DocsSearchDialog } from "./docs-search-dialog";
+export { DocsMobileDock } from "./docs-mobile-dock";

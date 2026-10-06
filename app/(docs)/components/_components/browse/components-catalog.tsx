@@ -12,6 +12,7 @@ import { AnnotatedText } from "@/components/underlines/annotated-text";
 
 import { ComponentPreviewCard } from "./component-preview-card";
 import { ShowcaseNewBadge } from "../shared/showcase-new-badge";
+import { DocsMobileSponsor } from "../shell/docs-mobile-sponsor";
 import Link from "next/link";
 
 type ComponentsCatalogProps = Readonly<{
@@ -55,6 +56,8 @@ export function ComponentsCatalog({
           code, and a live preview.
         </p>
       </div>
+
+      <DocsMobileSponsor />
 
       <div id="components" className="mt-10 scroll-mt-8">
         <h2 className="mb-2 font-serif text-xl text-neutral-900">

@@ -2,6 +2,7 @@ import { AnnotatedText } from "@/components/underlines/annotated-text";
 import type { ShowcaseCategoryGroup } from "@/lib/showcase";
 
 import { ComponentListRow } from "./component-list-row";
+import { DocsMobileSponsor } from "../shell/docs-mobile-sponsor";
 
 type ComponentsBrowseAllProps = Readonly<{
   categories: ShowcaseCategoryGroup[];
@@ -51,6 +52,8 @@ export function ComponentsBrowseAll({
           , and make it yours.
         </p>
       </div>
+
+      <DocsMobileSponsor />
 
       <section id="components" className="mt-16 min-w-0 scroll-mt-8 md:mt-10">
         <ul className="mt-6 flex flex-col gap-2">

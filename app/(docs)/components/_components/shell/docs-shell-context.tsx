@@ -6,6 +6,9 @@ type DocsShellContextValue = Readonly<{
   toggleSidebar: () => void;
   closeSidebar: () => void;
   isSidebarOpen: boolean;
+  openSearch: () => void;
+  closeSearch: () => void;
+  isSearchOpen: boolean;
 }>;
 
 const DocsShellContext = createContext<DocsShellContextValue | null>(null);

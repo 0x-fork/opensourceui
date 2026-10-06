@@ -19,7 +19,7 @@ import { JsonLd, createComponentMetadata, getComponentJsonLd } from "@/lib/seo";
 import type { Props } from "@/types/types";
 
 import { DocsPreviewStage } from "../_components/detail";
-import { DocsToc } from "../_components/shell";
+import { DocsToc, DocsMobileSponsor } from "../_components/shell";
 
 export const dynamicParams = false;
 
@@ -137,6 +137,8 @@ export default async function ComponentDetailPage({ params }: Readonly<Props>) {
                 {entry.description}
               </p>
             </header>
+
+            <DocsMobileSponsor />
           </div>
 
           <section id="preview" className="mt-10 scroll-mt-8 md:mt-12">

@@ -15,6 +15,38 @@
   html {
     scrollbar-gutter: stable;
   }
+
+  /* Keep docs search text/bg stable when iOS suggests or autofills. */
+  .docs-search-input,
+  .docs-search-input:focus,
+  .docs-search-input:hover {
+    color: #262626;
+    caret-color: #262626;
+  }
+
+  .docs-search-input:-webkit-autofill,
+  .docs-search-input:-webkit-autofill:hover,
+  .docs-search-input:-webkit-autofill:focus,
+  .docs-search-input:-webkit-autofill:active {
+    -webkit-text-fill-color: #262626;
+    caret-color: #262626;
+    box-shadow: 0 0 0 1000px #fafafa inset;
+    transition: background-color 99999s ease-in-out 0s;
+  }
+
+  .docs-search-input:focus:-webkit-autofill,
+  .docs-search-input:focus:-webkit-autofill:hover,
+  .docs-search-input:focus:-webkit-autofill:focus {
+    box-shadow: 0 0 0 1000px #ffffff inset;
+  }
+
+  /* Mobile docs chrome: content scrolls under frosted header + clear the find dock. */
+  @media (max-width: 767px) {
+    [data-docs-scroll] {
+      padding-top: 3.5rem;
+      padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
 }
 
 @layer utilities {

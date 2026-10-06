@@ -5,6 +5,7 @@ import { getShowcaseByCategory } from "@/lib/showcase/showcase";
 import { searchShowcaseEntries } from "@/lib/showcase/search-showcase";
 import { ComponentListRow } from "./component-list-row";
 import { ComponentsSearchEmpty } from "./components-search-empty";
+import { DocsMobileSponsor } from "../shell/docs-mobile-sponsor";
 
 type ComponentsSearchResultsProps = Readonly<{
   query: string;
@@ -72,6 +73,8 @@ export function ComponentsSearchResults({
           )}
         </p>
       </div>
+
+      <DocsMobileSponsor />
 
       <section id="components" className="mt-10 min-w-0 scroll-mt-8">
         {hasResults ? (

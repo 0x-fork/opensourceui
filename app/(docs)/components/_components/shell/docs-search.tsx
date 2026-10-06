@@ -1,25 +1,9 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useSyncExternalStore,
-  useTransition,
-} from "react";
-import { usePathname, useRouter } from "next/navigation";
-
+import { useEffect, useSyncExternalStore } from "react";
 import { Command, Search } from "lucide-react";
 
-import {
-  getHydratedSearchParam,
-  useHydratedSearchParams,
-} from "@/app/_shared/navigation/use-hydrated-search-params";
-
-function getComponentsSearchPath(pathname: string) {
-  return pathname.startsWith("/components") ? "/components" : pathname;
-}
+import { useDocsSearchQuery } from "./use-docs-search-query";
 
 function getSearchShortcutLabel() {
   if (typeof navigator === "undefined") return "Control K";
@@ -40,66 +24,15 @@ function subscribeShortcutLabel() {
 }
 
 export function DocsSearch() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useHydratedSearchParams();
-  const urlQuery = getHydratedSearchParam(searchParams, "q") ?? "";
+  const { inputRef, value, setValue, clearSearch, isFocusedRef } =
+    useDocsSearchQuery();
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const isFocusedRef = useRef(false);
-  const committedRef = useRef(urlQuery);
-  const [value, setValue] = useState("");
   const shortcutLabel = useSyncExternalStore(
     subscribeShortcutLabel,
     getSearchShortcutLabel,
     () => "Control K",
   );
   const isApple = shortcutLabel === "Command K";
-  const [, startTransition] = useTransition();
-
-  const applySearch = useCallback(
-    (next: string) => {
-      const trimmed = next.trim();
-      if (trimmed === committedRef.current.trim()) return;
-
-      committedRef.current = trimmed;
-
-      const params = new URLSearchParams(searchParams?.toString() ?? "");
-
-      if (trimmed) {
-        params.set("q", trimmed);
-        params.delete("category");
-      } else {
-        params.delete("q");
-      }
-
-      const nextQuery = params.toString();
-      const base = getComponentsSearchPath(pathname);
-      const href = nextQuery ? `${base}?${nextQuery}` : base;
-
-      startTransition(() => {
-        router.replace(href, { scroll: false });
-      });
-    },
-    [pathname, router, searchParams],
-  );
-
-  // Sync URL → input for back/forward and external links, never while the field is focused.
-  useEffect(() => {
-    committedRef.current = urlQuery;
-    if (!isFocusedRef.current) {
-      setValue(urlQuery);
-    }
-  }, [urlQuery]);
-
-  // Debounce typing before updating the URL so keystrokes stay local and fast.
-  useEffect(() => {
-    const timer = globalThis.setTimeout(() => {
-      applySearch(value);
-    }, 300);
-
-    return () => globalThis.clearTimeout(timer);
-  }, [value, applySearch]);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -109,6 +42,9 @@ export function DocsSearch() {
         event.metaKey !== event.ctrlKey && !event.shiftKey && !event.altKey;
 
       if (searchChord && event.key.toLowerCase() === "k") {
+        const isDesktop = globalThis.matchMedia("(min-width: 768px)").matches;
+        if (!isDesktop) return;
+
         event.preventDefault();
         inputRef.current?.focus();
         inputRef.current?.select();
@@ -120,15 +56,14 @@ export function DocsSearch() {
         document.activeElement === inputRef.current
       ) {
         event.preventDefault();
-        setValue("");
-        applySearch("");
+        clearSearch();
         inputRef.current?.blur();
       }
     }
 
     globalThis.addEventListener("keydown", onKeyDown);
     return () => globalThis.removeEventListener("keydown", onKeyDown);
-  }, [applySearch]);
+  }, [clearSearch, inputRef]);
 
   return (
     <label className="relative block w-full md:max-w-sm">
@@ -141,6 +76,7 @@ export function DocsSearch() {
       <input
         ref={inputRef}
         type="search"
+        name="docs-component-search"
         value={value}
         onChange={(event) => setValue(event.target.value)}
         onFocus={() => {
@@ -152,8 +88,12 @@ export function DocsSearch() {
         placeholder="Search components…"
         autoComplete="off"
         autoCorrect="off"
+        autoCapitalize="off"
         spellCheck={false}
-        className="w-full rounded-lg border border-neutral-100 bg-neutral-50/50 py-1.5 pr-3 pl-8 font-sans text-sm text-neutral-800 transition-colors outline-none placeholder:text-neutral-400 focus:border-rose-200 focus:bg-white md:pr-16"
+        enterKeyHint="search"
+        data-1p-ignore
+        data-lpignore="true"
+        className="docs-search-input w-full rounded-lg border border-neutral-100 bg-neutral-50/50 py-1.5 pr-3 pl-8 font-sans text-base text-neutral-800 transition-colors outline-none placeholder:text-neutral-400 focus:border-neutral-300 focus:bg-white md:pr-16 md:text-sm"
       />
       <kbd
         aria-label={shortcutLabel}

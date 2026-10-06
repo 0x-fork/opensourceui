@@ -5,7 +5,7 @@ import { ChevronRight, MoveRight } from "lucide-react";
 
 import { siteConfig } from "@/lib/site";
 
-/** Right-rail open slot — Platinum placement (distinct from left “See plans”). */
+/** Right-rail open slot — Platinum placement (distinct from left “Sponsorship”). */
 export function DocsSponsorCard() {
   return (
     <div className="shrink-0 border-t border-neutral-100 px-6 py-5">

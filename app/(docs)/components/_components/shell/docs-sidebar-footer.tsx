@@ -48,7 +48,7 @@ export function DocsSidebarFooter() {
           href={siteConfig.sponsorship.path}
           className="group inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-neutral-200 bg-white px-2 py-1.5 font-sans text-xs whitespace-nowrap text-neutral-800 shadow-sm transition-colors hover:border-neutral-100 hover:bg-neutral-50"
         >
-          See plans
+          Sponsorship
           <span className="relative inline-flex size-3 shrink-0 items-center justify-center">
             <ChevronRight
               size={12}
