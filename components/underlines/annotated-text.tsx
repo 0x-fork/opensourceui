@@ -425,7 +425,16 @@ type AnnotatedTextProps = Readonly<{
 
 export const AnnotatedText = forwardRef<HTMLSpanElement, AnnotatedTextProps>(
   ({ children, variant = "wavy", color, className }, ref) => {
-    const style = annotationStyles[variant];
+    const isKnownVariant = Object.hasOwn(annotationStyles, variant);
+    if (!isKnownVariant && process.env.NODE_ENV !== "production") {
+      console.warn(
+        `AnnotatedText: unknown variant "${String(variant)}", falling back to "wavy".`,
+      );
+    }
+    const resolvedVariant: AnnotationVariant = isKnownVariant
+      ? variant
+      : "wavy";
+    const style = annotationStyles[resolvedVariant];
     const Decoration = style.Decoration;
     const decorationClass = cn(
       style.decorationClassName,
@@ -433,7 +442,7 @@ export const AnnotatedText = forwardRef<HTMLSpanElement, AnnotatedTextProps>(
     );
 
     // Variants whose decoration sits behind the text (avoids covering glyphs).
-    const isBehindText = variant === "highlight";
+    const isBehindText = resolvedVariant === "highlight";
 
     if (isBehindText) {
       return (
