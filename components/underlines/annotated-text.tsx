@@ -425,15 +425,9 @@ type AnnotatedTextProps = Readonly<{
 
 export const AnnotatedText = forwardRef<HTMLSpanElement, AnnotatedTextProps>(
   ({ children, variant = "wavy", color, className }, ref) => {
-    const isKnownVariant = Object.hasOwn(annotationStyles, variant);
-    if (!isKnownVariant && process.env.NODE_ENV !== "production") {
-      console.warn(
-        `AnnotatedText: unknown variant "${String(variant)}", falling back to "wavy".`,
-      );
-    }
-    const resolvedVariant: AnnotationVariant = isKnownVariant
-      ? variant
-      : "wavy";
+    // Fall back to the default style if an unknown variant slips through at runtime.
+    const resolvedVariant: AnnotationVariant =
+      variant in annotationStyles ? variant : "wavy";
     const style = annotationStyles[resolvedVariant];
     const Decoration = style.Decoration;
     const decorationClass = cn(
